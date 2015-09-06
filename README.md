@@ -1,1 +1,1 @@
-Weixin JSSDK Api Service
+简单的微信 jssdk 服务器端实现
