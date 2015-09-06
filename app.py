@@ -23,6 +23,7 @@ def _is_allowed_url(url):
     host = extract_hostname(url)
     return host and any(fnmatch(host, p) for p in ALLOWED_HOSTS)
 
+
 @app.route('/sign')
 def sign():
     url = request.args.get('url')
