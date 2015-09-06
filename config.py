@@ -11,6 +11,8 @@ CACHE_CONFIG = {
 
 CORS_ALLOW_ORIGIN = '*'
 
+SENTRY_DSN = ''
+
 try:
     from local_config import *
 except ImportError:

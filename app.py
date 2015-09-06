@@ -1,13 +1,18 @@
 #-*-coding:utf-8-*-
 
 from flask import Flask, request, jsonify
-from config import APP_ID, APP_SECRET, CORS_ALLOW_ORIGIN
+from raven.contrib.flask import Sentry
+from config import APP_ID, APP_SECRET, CORS_ALLOW_ORIGIN, SENTRY_DSN
 from cache import cache
 from sign import Signer
 
-
 app = Flask(__name__)
 cache.init_app(app)
+
+if SENTRY_DSN:
+    app.config['SENTRY_DSN'] = SENTRY_DSN
+    sentry = Sentry(app)
+
 
 signer = Signer(APP_ID, APP_SECRET)
 
