@@ -1,7 +1,7 @@
 #-*-coding:utf-8-*-
 
 from flask import Flask, request, jsonify
-from config import APP_ID, APP_SECRET
+from config import APP_ID, APP_SECRET, CORS_ALLOW_ORIGIN
 from cache import cache
 from sign import Signer
 
@@ -16,7 +16,9 @@ signer = Signer(APP_ID, APP_SECRET)
 def api():
     url = request.args['url']
     ret = signer.sign(url)
-    return jsonify(ret)
+    resp = jsonify(ret)
+    resp.headers['Access-Control-Allow-Origin'] = CORS_ALLOW_ORIGIN
+    return resp
 
 
 if __name__ == '__main__':

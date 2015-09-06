@@ -9,6 +9,8 @@ CACHE_CONFIG = {
     'CACHE_REDIS_URL': 'redis://user:password@localhost:6379/0',
 }
 
+CORS_ALLOW_ORIGIN = '*'
+
 try:
     from local_config import *
 except ImportError:
