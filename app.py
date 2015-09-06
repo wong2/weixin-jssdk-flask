@@ -16,9 +16,8 @@ if SENTRY_DSN:
 
 signer = Signer(APP_ID, APP_SECRET)
 
-
-@app.route('/api')
-def api():
+@app.route('/sign')
+def sign():
     url = request.args['url']
     ret = signer.sign(url)
     resp = jsonify(ret)
