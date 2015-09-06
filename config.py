@@ -9,7 +9,7 @@ CACHE_CONFIG = {
     'CACHE_REDIS_URL': 'redis://user:password@localhost:6379/0',
 }
 
-CORS_ALLOW_ORIGIN = '*'
+ALLOWED_DOMAINS = ['*']
 
 SENTRY_DSN = ''
 

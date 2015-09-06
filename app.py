@@ -1,8 +1,9 @@
 #-*-coding:utf-8-*-
 
+from fnmatch import fnmatch
 from flask import Flask, request, jsonify
 from raven.contrib.flask import Sentry
-from config import APP_ID, APP_SECRET, CORS_ALLOW_ORIGIN, SENTRY_DSN
+from config import APP_ID, APP_SECRET, SENTRY_DSN, ALLOWED_DOMAINS
 from cache import cache
 from sign import Signer
 
@@ -18,10 +19,11 @@ signer = Signer(APP_ID, APP_SECRET)
 
 @app.route('/sign')
 def sign():
-    url = request.args['url']
+    url = request.args.get('url')
+    assert url and any(fnmatch(url, p) for p in ALLOWED_DOMAINS)
     ret = signer.sign(url)
     resp = jsonify(ret)
-    resp.headers['Access-Control-Allow-Origin'] = CORS_ALLOW_ORIGIN
+    resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
 
 
